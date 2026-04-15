@@ -25,7 +25,10 @@
     "daemon:stop:dist": "node dist/app/cli.js stop",
     "daemon:status": "tsx src/app/cli.ts status",
     "daemon:status:dist": "node dist/app/cli.js status",
-    "autostart:setup": "tsx src/app/cli.ts setup-autostart"
+    "autostart:setup": "tsx src/app/cli.ts setup-autostart",
+    "nova": "tsx src/cli.ts",
+    "nova:test": "tsx src/test-agent.ts",
+    "nova:debug": "NOVA_DEBUG=true tsx src/cli.ts"
   },
   "dependencies": {
     "@alcalzone/ansi-tokenize": "^0.3.0",

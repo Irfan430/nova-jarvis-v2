@@ -1,19 +1,127 @@
-# Nova Jarvis V2
+# Nova Jarvis v2 🤖
 
-A modern, LLM-driven OS control agent designed to be flexible and powerful.
+> **তোমার ব্যক্তিগত AI OS এজেন্ট** — Jarvis-এর মতো, কিন্তু বাস্তব এবং আরও শক্তিশালী।
 
-## Features
-- **LLM-First Architecture**: Decisions are made by the LLM, not hardcoded rules.
-- **Tool-Based Execution**: Extensible tool registry for browser, shell, and OS operations.
-- **Bangla Support**: Native support for Bangla and English inputs.
+Nova হলো একটি সত্যিকারের লাইভ AI এজেন্ট যে তোমার কম্পিউটার, ফাইল, ব্রাউজার, এবং ইন্টারনেট নিয়ন্ত্রণ করতে পারে। সে বাংলায় কথা বলে, নিজেকে চেনে, এবং টুলস ব্যবহার করে বাস্তব কাজ করে।
 
-## Getting Started
-1. Install dependencies: `npm install`
-2. Set up environment variables: `OPENAI_API_KEY` and `OPENROUTER_API_KEY`.
-3. Run the agent: `npm start`
+---
 
-## Project Structure
-- `src/agent`: Core agent logic and control loop.
-- `src/tools`: Tool definitions and registry.
-- `src/runtime`: Environment and execution management.
-- `src/utils`: Shared utilities and logging.
+## ✨ নতুন ফিচার (v2 আপগ্রেড)
+
+| আগে | এখন |
+|-----|-----|
+| মাত্র ২টি টুল (bash, browser_open) | **১৭টি শক্তিশালী টুল** |
+| কোনো পরিচয় নেই | **গভীর ব্যক্তিত্ব ও পরিচয়** |
+| মেমোরি নেই | **পার্সিস্টেন্ট মেমোরি সিস্টেম** |
+| কোনো CLI নেই | **ইন্টারেক্টিভ লাইভ CLI** |
+| Hardcoded bot আচরণ | **সত্যিকারের AI এজেন্ট** |
+| বাংলা সাপোর্ট নেই | **বাংলা-ফার্স্ট ডিজাইন** |
+
+---
+
+## 🛠️ উপলব্ধ টুলস
+
+| টুল | বিবরণ |
+|-----|-------|
+| `bash` | যেকোনো শেল কমান্ড চালাও |
+| `file_read` | ফাইল পড়ো |
+| `file_write` | ফাইল তৈরি বা লেখো |
+| `file_edit` | ফাইল সম্পাদনা করো |
+| `list_directory` | ডিরেক্টরি তালিকা দেখো |
+| `web_fetch` | URL থেকে তথ্য আনো |
+| `web_search` | ইন্টারনেটে সার্চ করো |
+| `system_info` | CPU, RAM, ডিস্ক তথ্য |
+| `process_list` | চলমান প্রসেস দেখো |
+| `get_datetime` | তারিখ ও সময় পাও |
+| `get_env` | পরিবেশ ভেরিয়েবল দেখো |
+| `remember` | তথ্য দীর্ঘমেয়াদীভাবে মনে রাখো |
+| `recall` | মনে রাখা তথ্য ফিরিয়ে আনো |
+| `browser_navigate` | ব্রাউজারে যাও |
+| `browser_snapshot` | পেজের snapshot নাও |
+| `browser_click` | ব্রাউজারে ক্লিক করো |
+| `browser_type` | ব্রাউজারে টাইপ করো |
+
+---
+
+## 🚀 শুরু করার নিয়ম
+
+### ১. ইনস্টল করো
+```bash
+npm install --ignore-scripts
+```
+
+### ২. API Key সেট করো
+```bash
+export OPENAI_API_KEY="তোমার-api-key"
+```
+
+### ৩. লাইভ চ্যাট শুরু করো
+```bash
+npm run nova
+# অথবা তোমার নাম দিয়ে:
+npx tsx src/cli.ts Irfan
+```
+
+### ৪. টেস্ট চালাও
+```bash
+npm run nova:test
+```
+
+### ৫. ডিবাগ মোড
+```bash
+npm run nova:debug
+```
+
+---
+
+## 💬 উদাহরণ কথোপকথন
+
+```
+Irfan › তুমি কে?
+
+Nova: আমি Nova — তোমার ব্যক্তিগত AI OS এজেন্ট।
+      আমি তোমার কম্পিউটার, ফাইল, ব্রাউজার সব নিয়ন্ত্রণ করতে পারি।
+
+Irfan › আমার সিস্টেমের RAM কত?
+
+Nova: তোমার সিস্টেমে মোট 16 GB RAM আছে, এখন 4.2 GB ব্যবহার হচ্ছে।
+
+Irfan › আমার নাম Irfan মনে রাখো
+
+Nova: মনে রাখা হয়েছে! আর কিছু বলো।
+```
+
+---
+
+## 🏗️ আর্কিটেকচার
+
+```
+src/
+├── agent/
+│   ├── Agent.ts         ← মূল এজেন্ট লুপ
+│   ├── Brain.ts         ← Nova-র ব্যক্তিত্ব ও সিস্টেম প্রম্পট
+│   └── Memory.ts        ← পার্সিস্টেন্ট মেমোরি সিস্টেম
+├── tools/
+│   └── ToolRegistry.ts  ← সব টুলস
+├── utils/
+│   └── Logger.ts        ← রঙিন লগার
+├── cli.ts               ← ইন্টারেক্টিভ CLI
+└── test-agent.ts        ← টেস্ট স্যুট
+```
+
+---
+
+## ⚙️ পরিবেশ ভেরিয়েবল
+
+| ভেরিয়েবল | বিবরণ | ডিফল্ট |
+|-----------|-------|--------|
+| `OPENAI_API_KEY` | OpenAI API Key | (আবশ্যক) |
+| `NOVA_USER` | ব্যবহারকারীর নাম | `Boss` |
+| `NOVA_MODEL` | AI মডেল | `gpt-4.1-mini` |
+| `NOVA_DEBUG` | ডিবাগ মোড | `false` |
+
+---
+
+## 📝 লাইসেন্স
+
+Private — Irfan কর্তৃক তৈরি।
