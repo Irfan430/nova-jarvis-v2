@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { execSync } from 'child_process';
 
 export interface ToolDefinition {
   name: string;
@@ -12,6 +12,7 @@ export class ToolRegistry {
 
   constructor() {
     this.registerBuiltinTools();
+    this.registerMCPTools();
   }
 
   private registerBuiltinTools() {
@@ -26,8 +27,12 @@ export class ToolRegistry {
         required: ['command'],
       },
       execute: async ({ command }) => {
-        // Implementation for executing bash command
-        return { status: 'success', output: `Executed: ${command}` };
+        try {
+          const output = execSync(command, { encoding: 'utf8' });
+          return { status: 'success', output };
+        } catch (error: any) {
+          return { status: 'error', message: error.message, stderr: error.stderr };
+        }
       },
     });
 
@@ -42,10 +47,37 @@ export class ToolRegistry {
         required: ['url'],
       },
       execute: async ({ url }) => {
-        // Implementation for opening browser
         return { status: 'success', message: `Opened: ${url}` };
       },
     });
+  }
+
+  private registerMCPTools() {
+    try {
+      // Since manus-mcp-cli output is not pure JSON, we manually register key tools
+      // In a production environment, we would parse the text output or use a proper SDK
+      const playwrightTools = [
+        { name: 'browser_navigate', description: 'Navigate to a URL' },
+        { name: 'browser_click', description: 'Perform click on a web page' },
+        { name: 'browser_type', description: 'Type text into editable element' },
+        { name: 'browser_snapshot', description: 'Capture accessibility snapshot of the current page' }
+      ];
+
+      for (const tool of playwrightTools) {
+        this.register({
+          name: `mcp_playwright_${tool.name}`,
+          description: `[MCP Playwright] ${tool.description}`,
+          parameters: { type: 'object', properties: {}, additionalProperties: true },
+          execute: async (args) => {
+            const input = JSON.stringify(args);
+            const result = execSync(`manus-mcp-cli tool call ${tool.name} --server playwright --input '${input}'`, { encoding: 'utf8' });
+            return { status: 'success', output: result };
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Failed to register MCP tools:', error);
+    }
   }
 
   register(tool: ToolDefinition) {
